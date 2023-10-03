@@ -229,6 +229,20 @@ We cannot add two different data types, e.g., int and int8 or int and float32, b
 - channels are a way to communicate and synchronize between goroutine
 - Channels provide a way for goroutines to send and receive data safely allowing for the coordination of concurrent task.
 - Channels:
+
   - holds data
   - thread safe
   - listens for data
+
+- we can use channels that hold single data: this called unbuffers channels
+
+  - `var ch = make(chan int)` // this will create a channel that holds int
+  - `ch <- 5` // this will send the value 5 to the channel this should do by another goroutine
+  - `var val = <- ch` // this will receive the value from the channel and store it in the variable val
+  - if we finish sending data toe the channel we have to close the channel
+    - `close(ch)` // to avoid deadlock code
+
+- we can use channels that hold multiple data: this called buffers channels
+  - `var ch = make(chan int, 5)` // this will create a channel that holds int and can hold 5 values
+  - `ch <- 5` // this will send the value 5 to the channel this should do by another goroutine
+  - `var val = <- ch` // this will receive the value from the channel and store it in the variable val
